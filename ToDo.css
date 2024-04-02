@@ -59,6 +59,10 @@ header{
   padding-right: 20px;
 }
 
+#search-interface>*{
+  margin: 5px;
+}
+
 #search-bar{
   height: 50%;
 }
@@ -67,16 +71,20 @@ header{
   height: 62%;
 }
 
+#add-button{
+  height: 62%;
+  width: 130%;
+}
+
 /* ToDo Items */
 
 .ToDo-item{
   padding-left: var(--margin-padding);
   padding-right: calc(var(--margin-padding) / 2);
 
-  height: 50px;
+  max-height: 50px;
 
   display: flex;
-  /* justify-content: space-between; */
   align-items: center;
 }
 
