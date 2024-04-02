@@ -1,0 +1,104 @@
+:root{
+  --margin-padding: 9%;
+}
+
+html{
+    height: 100%;
+}
+
+body{
+    height: 100%;
+}
+
+/* styling paper */
+#paper {
+  height: 100%;
+  position: relative;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: rgb(248, 248, 243);
+  box-shadow: 0px 0px 5px 0px #888;
+}
+  
+/* styling margin red vertical line */
+#paper::before {
+  content: '';
+  width: 2px;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 8%;
+  background-color: rgba(255,0,0,0.6);
+}
+  
+  /* styling blue horizontal lines */
+#pattern {
+  height: 100%;
+  background-image: repeating-linear-gradient(rgb(248, 248, 243) 0px, rgb(248, 248, 243) 49px, teal 50px);
+}
+
+/* Header Items */
+
+header{
+  display: flex;
+  justify-content: space-between;
+}
+
+#title{
+  padding-left: var(--margin-padding);
+  padding-top: 1px;
+  }
+
+#title h1{
+  margin-top: 12px;
+  margin-bottom: 0px;
+}
+
+#search-interface{
+  display: flex;
+  padding-right: 20px;
+}
+
+#search-bar{
+  height: 50%;
+}
+
+#filters-button{
+  height: 62%;
+}
+
+/* ToDo Items */
+
+.ToDo-item{
+  padding-left: var(--margin-padding);
+  padding-right: calc(var(--margin-padding) / 2);
+
+  height: 50px;
+
+  display: flex;
+  /* justify-content: space-between; */
+  align-items: center;
+}
+
+.ToDo-item-title{
+  font-size: 120%;
+}
+
+.ToDo-item-tags{
+  display: flex;
+  justify-content: space-evenly;
+  margin-left: auto;
+}
+
+.tag{
+  margin: 5px;
+}
+
+input[type="checkbox"]{
+  height: 20px;
+  width: 20px;
+}
+
+.checkbox{
+  margin-right: 5%;
+}

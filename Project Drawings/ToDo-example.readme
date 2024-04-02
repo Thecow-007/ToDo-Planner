@@ -1,0 +1,6 @@
+This shows a couple of features the ToDo items will have.
+    - When the item title is clicked (or selected) it becomes editable.
+    - The tags operate the same way, a text box appears and their hashtag disapears.
+    - There is a curcular 'add' button on the right of the header that adds a new item, with a default name.
+        - Perhaps "ToDo item $" where $ increases as the user adds default items.
+            - Ie the first item is named "ToDo item 1" and the second "ToDo item 2"

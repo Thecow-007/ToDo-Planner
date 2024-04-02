@@ -1,0 +1,8 @@
+Shows the table view of the planner.
+Notes:
+    - The tables are titled by tag name.
+    - An item may have multiple tags and thus appear in multiple tables.
+        - if you check of one such item, it must be checked off in all tables.
+    - Tables are arranged with the largest appearing first.
+    - Amount of tables displayed side by side depends on device width.
+    - 

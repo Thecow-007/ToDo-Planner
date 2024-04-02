@@ -1,0 +1,7 @@
+Notes:
+    - The current view's icon is given a border, or second rectangle around it to indicate it is selected.
+    - The header in this version is not final, see ToDo-example for a better rendition.
+    - The contents of the ToDo item will be saved to a file, perhaps in JSON.
+    - Different colors for different tags. Using a color palate of 8-16 colors.
+    - This version contains description which I have opted to remove.
+    - This version also has a blank toDo item with an add button, this also is removed, see ToDo-example.

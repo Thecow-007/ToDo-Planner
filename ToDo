@@ -1,0 +1,30 @@
+ToDo-item{
+    - When you click on the items title, a text box appears and you can edit the title.
+    - When you click the checkbox, the title gets crossed out and moved to bottom of the list.
+}
+
+Search bar{
+    - add search bar
+    - Searches based on Regex like /.*[search].*/z
+}
+
+Filters button{
+    - opens a panel full of radio buttons / circle buttons.
+    - First type of filter:
+        - By age, newest to oldest / oldest to newest. (only one can be selected).
+    - Second type
+        - by tag.
+        - list of tags updates every time a new tag is added.
+        - multiple tags can be selected.
+}
+
+Tags{
+    - add colored circles around tags
+        - Create a color palate of 8-16 colors for tags.
+    - Same tags have the same color.
+}
+
+Views{
+    - Add icons for list view and table view.
+    - Add Table viewd
+}
