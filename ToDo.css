@@ -57,6 +57,7 @@ header{
 #search-interface{
   display: flex;
   padding-right: 20px;
+  align-items: center;
 }
 
 #search-interface>*{
@@ -72,8 +73,35 @@ header{
 }
 
 #add-button{
-  height: 62%;
-  width: 130%;
+  height: 100%;
+  width: 100%;
+
+  max-width: 35px;
+  max-height: 35px;
+
+  /* display: inline-block; */
+  
+  justify-content: center;
+  align-items: center;
+  display: flex;
+
+  border: 1px solid black;
+  border-radius: 50%;
+  background-color: #58976b;
+  color: white;
+  font-weight: bold;
+  padding: 8px;
+  text-align: center;
+  text-shadow:
+  1px 1px 0 black,
+  -1px 1px 0 black,
+  1px -1px 0 black,
+  -1px -1px 0 black;
+}
+
+#add-button>span{
+  padding: 0px;
+  font-size: 30px;
 }
 
 /* ToDo Items */
