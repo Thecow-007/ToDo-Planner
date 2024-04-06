@@ -35,5 +35,13 @@ DataBase{
 }
 
 JavaScript{
-    - 
+    - Remove ToDo button.
+    - Edit ToDo items by clicking on them.
+    - Every time an edit is finished, the database is automatically updated.
+}
+
+php{
+    - interface with the database:
+        - Allow for inserts and deletes.
+    - Validate all inputs to ensure they wont damage the database.
 }
