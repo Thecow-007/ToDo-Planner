@@ -110,7 +110,7 @@ function addToDoEvents(ToDoItem){
     var itemId = ToDoItem.id;
     var itemIndex  = itemId.substring(4);
     var itemTitle = document.getElementById("item-title" + itemIndex);
-    var itemTags = getTags(itemIndex);
+    //var itemTags = getTags(itemIndex);
 
     // Add the event listeners
     itemTitle.addEventListener("click", function() {
