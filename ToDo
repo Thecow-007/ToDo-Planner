@@ -26,5 +26,14 @@ Tags{
 
 Views{
     - Add icons for list view and table view.
-    - Add Table viewd
+    - Add Table view.
+}
+
+DataBase{
+    - Insert some default data.
+    - 
+}
+
+JavaScript{
+    - 
 }
