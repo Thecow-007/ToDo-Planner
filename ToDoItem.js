@@ -6,10 +6,35 @@ function addToDo() {
         isChecked: false,
         title: "Click to add title...",
         date: new Date(),
-        tags: ["new tag...", "Another tag..."] //remove tag2 for final
+        tags: ["new tag..."]
     }
 
     ToDoList.push(defaultToDo);
+    printList();
+}
+//ToDo: Remove this function before submit. Just adds test items to the ToDoList.
+function addTestToDo(){
+    let searchBar = {
+        isChecked: false,
+        title: "Create Search bar function.",
+        date: new Date(),
+        tags: ["search", "button", "JavaScript"]
+    }
+    let filters = {
+        isChecked: false,
+        title: "Create Filters button",
+        date: new Date(),
+        tags: ["filters", "button", "JavaScript"]
+    }
+    let backend = {
+        isChecked: false,
+        title: "Connect users id + ToDo items to backend",
+        date: new Date(),
+        tags: ["backend", "php", "database"]
+    }
+    ToDoList.push(searchBar);
+    ToDoList.push(filters);
+    ToDoList.push(backend);
     printList();
 }
 
@@ -19,7 +44,7 @@ function appendToDo(item, index) {
     listItem.id = "item" + index;
     listItem.innerHTML = `
         <div class="checkbox">
-            <input type="checkbox" value="${item.isChecked}" id="item-checkbox${index}">
+            <input type="checkbox" ${item.isChecked ? "checked" : ""} id="item-checkbox${index}">
         </div>
       <div class="ToDo-item-title">
         <h3 id="item-title${index}">${item.title}</h3>
@@ -59,8 +84,13 @@ function setDate(index, newDate) {
 }
 
 function addTag(index, newTag) {
-    tagList.add(newTag);
-    ToDoList[index].tags.push(newTag);
+    var isTag = ToDoList[index].tags.indexOf(newTag);
+    if(isTag == -1){
+        tagList.add(newTag);
+        ToDoList[index].tags.push(newTag);
+        return true;
+    }
+    return false;
 }
 
 function removeTag(index, oldTag) {
@@ -101,6 +131,7 @@ function removeToDo(index) {
 function printList() {
     document.getElementById('ToDo-Items').innerHTML = "";
     for (var i = 0; i < ToDoList.length; i++) {
+        ToDoList[i].tags = sortTagArray(i);
         var ToDoItem = appendToDo(ToDoList[i], i);
         addToDoEvents(ToDoItem);
     }
@@ -110,11 +141,26 @@ function addToDoEvents(ToDoItem){
     var itemId = ToDoItem.id;
     var itemIndex  = itemId.substring(4);
     var itemTitle = document.getElementById("item-title" + itemIndex);
-    //var itemTags = getTags(itemIndex);
+    var itemTags = tagsToArray(itemIndex);
+    var itemCheckBox = document.getElementById("item-checkbox" + itemIndex);
 
     // Add the event listeners
+    // Title event listener
     itemTitle.addEventListener("click", function() {
         gatherTitleInput(itemIndex);
+    });
+
+    // Tags Event listener
+    itemTags.forEach(function(element){
+        element.addEventListener("click", function(){
+            gatherTagInput(itemIndex, element.id);
+        });
+    });
+
+    // Checkbox event listener
+    itemCheckBox.addEventListener("click", function(){
+        ToDoList[itemIndex].isChecked = !ToDoList[itemIndex].isChecked;
+        printList();
     });
 }
 
@@ -127,10 +173,10 @@ function gatherTitleInput(index){
     inputElement.type = "text";
     inputElement.value = titleText;
     inputElement.id = "item-title-bar" + index;
+    inputElement.className = "item-title-bar";
 
     var oldh3 = document.getElementById("item-title" + index);
     let oldh3Value = oldh3.textContent;
-    console.log("olh3 value1: " + oldh3Value);
     var titleContainer = oldh3.parentNode;
 
     titleContainer.replaceChild(inputElement, oldh3);
@@ -162,8 +208,81 @@ function gatherTitleInput(index){
 }
 
 //Function to collect tag input
-function gatherTagInput(index){
+function gatherTagInput(index, tagID){
+    numbers = tagID.match(/\d+/g);
+    tagIndex = numbers[1];
+    // var tagIndex = tagID.split
+    // var tagText = ToDoList[index].tags;
 
+    var tag = document.getElementById(tagID);
+    var tagValue = document.querySelector("#" + tagID + " p").textContent;
+    var tagContainer = tag.parentElement;
+
+    var inputElement = document.createElement('input');
+    inputElement.type = "text";
+    inputElement.value = tagValue;
+    inputElement.id = "item-tag-bar" + index;
+    inputElement.className = "item-tag-bar";
+    
+    tagContainer.replaceChild(inputElement, tag);
+
+    // Focus on the input field
+    inputElement.focus();
+
+    inputElement.addEventListener("keypress", function(event) {
+        if((tagValue == "new tag...")  && (event.key === "Enter")){
+            removeTag(index, tagValue);
+            addTag(index, inputElement.value);
+            addTag(index, tagValue);
+            printList();
+        }
+        else if ((inputElement.value.trim() == "") && (event.key === "Enter")) {
+            // If the input field is empty, remove the tag
+            removeTag(index, tagValue);
+            printList();
+        }else if (event.key === "Enter") {
+            removeTag(index, tagValue);
+            addTag(index, inputElement.value);
+            printList();
+        }
+    });
+
+    inputElement.addEventListener("blur", function(){
+        if (inputElement.value.trim() == "") {
+            // If the input field is empty, revert back to regular tag value
+            printList();
+        } else if (!(tagValue == "new tag...")){
+            removeTag(index, tagValue);
+            addTag(index, inputElement.value);
+            printList();
+        } else if(tagValue == "new tag..."){
+            removeTag(index, tagValue);
+            addTag(index, inputElement.value);
+            addTag(index, tagValue);
+            printList();
+        }
+    });
 }
 
+function sortTagArray(index){
+    var tagArray = ToDoList[index].tags;
+    tagArray = tagArray.filter(function(tag) {
+        if(tag != "new tag..."){
+            return tag;
+        }
+    }).sort();
+    tagArray.push("new tag...");
+    return tagArray;
+}
 
+function tagsToArray(index){
+    let tagsArray = ToDoList[index].tags;
+    let outputArray = [];
+    for(var i = 0; i < tagsArray.length; i++){
+        outputArray.push(document.getElementById("item" + index + "-tag" + i));
+    }
+    return outputArray;
+}
+
+//ToDo: remove before submit:
+addTestToDo(); //populates the array with some test info. 
