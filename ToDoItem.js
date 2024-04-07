@@ -1,12 +1,19 @@
 let ToDoList = [];
+let ToDoItems = [];
 let tagList = [];
 // let colorArray = ["#0E6BA8", "#F1DB4B","#F9E784","#B37BA4", "#84A98C","#D05353", "#E6ADEC", "#69DDFF", "#B4CDED", "#4CE0B3",  "#BFCC94"];
+
+// toggles the class 'active' to the object with given ID
+function toggleActive(elementID){
+    var element = document.getElementById(elementID);
+    element.classList.toggle('active');
+    printList();
+}
 
 function addToDo() {
     let defaultToDo = {
         isChecked: false,
         title: "Click to add title...",
-        date: new Date(),
         tags: ["new tag..."]
     }
 
@@ -18,19 +25,16 @@ function addTestToDo(){
     let searchBar = {
         isChecked: false,
         title: "Create Search bar function.",
-        date: new Date(),
         tags: ["search", "button", "JavaScript"]
     }
     let filters = {
         isChecked: false,
         title: "Create Filters button",
-        date: new Date(),
         tags: ["filters", "button", "JavaScript"]
     }
     let backend = {
         isChecked: false,
         title: "Connect users id + ToDo items to backend",
-        date: new Date(),
         tags: ["backend", "php", "database"]
     }
     ToDoList.push(searchBar);
@@ -78,8 +82,6 @@ function incrementTagColorCounter(amount) {
 
 function generateTag(index){
     var tagString = ``;
-    console.log(ToDoList[index].tags);
-    console.log(tagList);
     for(var i = 0; i < ToDoList[index].tags.length; i++){
         var colorIndex = incrementTagColorCounter(tagList.indexOf(ToDoList[index].tags[i]));
         tagString += `<div class="tag${colorIndex} tag" id="item${index}-tag${i}"><p>${ToDoList[index].tags[i]}</p></div>`;
@@ -153,6 +155,12 @@ function removeToDo(index) {
 }
 
 function printList() {
+    // copy ToDoList into ToDoItems
+    ToDoItems = JSON.parse(JSON.stringify(ToDoList));
+    //ToDo: apply filters and search functions
+    sortToDoList(); // applies filters, or "sorts"
+    searchToDoList(); //apply the search filter
+
     document.getElementById('ToDo-Items').innerHTML = "";
     tagList.splice(0, tagList.length);
     for (var i = 0; i < ToDoList.length; i++) {
@@ -160,6 +168,8 @@ function printList() {
         var ToDoItem = appendToDo(ToDoList[i], i);
         addToDoEvents(ToDoItem);
     }
+    //copy ToDoItems to ToDoList
+    ToDoList = JSON.parse(JSON.stringify(ToDoItems));
 }
 
 function addToDoEvents(ToDoItem){
@@ -208,6 +218,7 @@ function gatherTitleInput(index){
 
     // Focus on the input field
     inputElement.focus();
+    inputElement.select();
 
     inputElement.addEventListener("keypress", function(event) {
         if ((inputElement.value.trim() == "") && (event.key === "Enter")) {
@@ -251,6 +262,7 @@ function gatherTagInput(index, tagID){
 
     // Focus on the input field
     inputElement.focus();
+    inputElement.select();
 
     inputElement.addEventListener("keypress", function(event) {
         if((tagValue == "new tag...")  && (event.key === "Enter")){
@@ -304,5 +316,68 @@ function tagsToArray(index){
     return outputArray;
 }
 
+function sortToDoList(){
+    //if sort alphebetical
+    let isAlpha = document.getElementById('alpha-button').checked;
+    let isReverse = document.getElementById('reverse-button').checked;
+    let isByTag = document.getElementById('tag-button').checked;
+
+    if(isAlpha){
+        ToDoList.sort((a, b) => {
+            // Convert titles to lowercase for case-insensitive sorting
+            var titleA = a.title.toLowerCase();
+            var titleB = b.title.toLowerCase();
+        
+            if (titleA < titleB) return -1;
+            if (titleA > titleB) return 1;
+            return 0;
+        });
+    } else if(isReverse){
+        ToDoList.sort((a, b) => {
+            // Convert titles to lowercase for case-insensitive sorting
+            var titleA = a.title.toLowerCase();
+            var titleB = b.title.toLowerCase();
+        
+            if (titleA < titleB) return 1;
+            if (titleA > titleB) return -1;
+            return 0;
+        });
+    }
+
+    if(isByTag){
+        ToDoList.sort((a, b) => {
+            // Convert titles to lowercase for case-insensitive sorting
+            var tagA = a.tags[0].toLowerCase();
+            var tagB = b.tags[0].toLowerCase();
+        
+            if (tagA < tagB) return -1;
+            if (tagA > tagB) return 1;
+            return 0;
+        });
+    }
+}
+
+function addFilterWindowListener(){
+    let filterButtons = document.getElementsByClassName('filter');
+    Array.from(filterButtons).forEach(function(button){
+        button.addEventListener("change", printList);
+    });
+}
+
+function searchToDoList(){
+    var output = [];
+    var searchElement = document.getElementById('search-bar');
+    var searchVal = searchElement.value;
+    const regex = new RegExp(".*" + searchVal + ".*");
+    for(item of ToDoList){
+        if(regex.test(item.title)){
+            output.push(item);
+        }
+    }
+    ToDoList = output;
+}
+
 //ToDo: remove before submit:
 addTestToDo(); //populates the array with some test info. 
+
+addFilterWindowListener(); //adds the listener to the sort window

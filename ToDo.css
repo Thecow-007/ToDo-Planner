@@ -150,7 +150,7 @@ header{
   height: 50%;
 }
 
-input[type="checkbox"]{
+.checkbox input[type="checkbox"]{
   height: 20px;
   width: 20px;
 }
@@ -216,4 +216,25 @@ input[type="checkbox"]{
 }
 .tag10{
   background-color: var(--color10);
+}
+
+/* Sort Window */
+.active{
+  display: none;
+}
+
+#sort-window{
+  z-index: 1000;
+  position: absolute;
+  right: 0px;
+  background-color: white;
+  border-radius: 5%;
+  border: 2px solid slategray;
+  padding: 5px;
+  justify-self: right;
+}
+
+#sort-title{
+  margin-top: 0px;
+  margin-bottom: 5px;
 }
