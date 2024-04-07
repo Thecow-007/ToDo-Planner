@@ -1,5 +1,6 @@
 let ToDoList = [];
-let tagList = new Set();
+let tagList = [];
+// let colorArray = ["#0E6BA8", "#F1DB4B","#F9E784","#B37BA4", "#84A98C","#D05353", "#E6ADEC", "#69DDFF", "#B4CDED", "#4CE0B3",  "#BFCC94"];
 
 function addToDo() {
     let defaultToDo = {
@@ -62,10 +63,26 @@ function appendToDo(item, index) {
     return listItem;
 }
 
+
+function incrementTagColorCounter(amount) {
+    let tagColorCounter = 0;
+    for(var i = 0; i < amount; i++){
+        // Check if counter has reached 11, if so reset it to 0
+        if (tagColorCounter > 10) {
+            tagColorCounter = 0;
+        }
+        tagColorCounter++;
+    }
+    return tagColorCounter;
+  }
+
 function generateTag(index){
     var tagString = ``;
+    console.log(ToDoList[index].tags);
+    console.log(tagList);
     for(var i = 0; i < ToDoList[index].tags.length; i++){
-        tagString += `<div class="tag" id="item${index}-tag${i}"><p>${ToDoList[index].tags[i]}</p></div>`;
+        var colorIndex = incrementTagColorCounter(tagList.indexOf(ToDoList[index].tags[i]));
+        tagString += `<div class="tag${colorIndex} tag" id="item${index}-tag${i}"><p>${ToDoList[index].tags[i]}</p></div>`;
     }
     return tagString;
 }
@@ -84,9 +101,16 @@ function setDate(index, newDate) {
 }
 
 function addTag(index, newTag) {
-    var isTag = ToDoList[index].tags.indexOf(newTag);
-    if(isTag == -1){
-        tagList.add(newTag);
+    var isIndexTag = ToDoList[index].tags.indexOf(newTag);
+    var isTag = tagList.indexOf(newTag);
+    if(isTag == -1 && isIndexTag == -1){
+        tagList.push(newTag);
+        ToDoList[index].tags.push(newTag);
+        return true;
+    } else if(isTag == -1){
+        tagList.push(newTag);
+        return true;
+    } else if(isIndexTag == -1){
         ToDoList[index].tags.push(newTag);
         return true;
     }
@@ -95,9 +119,9 @@ function addTag(index, newTag) {
 
 function removeTag(index, oldTag) {
     // Check if the tag is not used by any todo item
-    if (!ToDoList.some(ToDoList => ToDoList.tags.includes(oldTag))) {
-        // Remove the tag from the tag set
-        tagList.delete(oldTag);
+    var listIndex = tagList.indexOf(oldTag);
+    if (!ToDoList.some(ToDoList => ToDoList.tags.includes(oldTag))) { //checks for other items with same tag.
+        tagList.splice(listIndex, 1); //remove the unused tag from the array
     }
     var tagIndex = ToDoList[index].tags.indexOf(oldTag); // Find the index of oldTag in the tags array
     if (tagIndex !== -1) { // If oldTag is found in the array
@@ -130,8 +154,9 @@ function removeToDo(index) {
 
 function printList() {
     document.getElementById('ToDo-Items').innerHTML = "";
+    tagList.splice(0, tagList.length);
     for (var i = 0; i < ToDoList.length; i++) {
-        ToDoList[i].tags = sortTagArray(i);
+        sortTagArray(i);
         var ToDoItem = appendToDo(ToDoList[i], i);
         addToDoEvents(ToDoItem);
     }
@@ -211,8 +236,6 @@ function gatherTitleInput(index){
 function gatherTagInput(index, tagID){
     numbers = tagID.match(/\d+/g);
     tagIndex = numbers[1];
-    // var tagIndex = tagID.split
-    // var tagText = ToDoList[index].tags;
 
     var tag = document.getElementById(tagID);
     var tagValue = document.querySelector("#" + tagID + " p").textContent;
@@ -233,7 +256,6 @@ function gatherTagInput(index, tagID){
         if((tagValue == "new tag...")  && (event.key === "Enter")){
             removeTag(index, tagValue);
             addTag(index, inputElement.value);
-            addTag(index, tagValue);
             printList();
         }
         else if ((inputElement.value.trim() == "") && (event.key === "Enter")) {
@@ -258,7 +280,6 @@ function gatherTagInput(index, tagID){
         } else if(tagValue == "new tag..."){
             removeTag(index, tagValue);
             addTag(index, inputElement.value);
-            addTag(index, tagValue);
             printList();
         }
     });
@@ -268,11 +289,10 @@ function sortTagArray(index){
     var tagArray = ToDoList[index].tags;
     tagArray = tagArray.filter(function(tag) {
         if(tag != "new tag..."){
-            return tag;
+            addTag(index, tag);
         }
     }).sort();
-    tagArray.push("new tag...");
-    return tagArray;
+    addTag(index, "new tag...");
 }
 
 function tagsToArray(index){
