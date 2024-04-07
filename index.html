@@ -1,88 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./ToDo.css">
-    <title>ToDo Planner</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./ToDo.css">
+  <title>ToDo Planner</title>
 
-    <script defer src="./ToDoItem.js"></script>
+  <script defer src="./ToDoItem.js"></script>
 </head>
+
 <body>
-    <div id="paper">
-        <div id="pattern">
+  <div id="paper">
+    <div id="pattern">
 
-          <!-- Header -->
-          <header>
-            <div id="title">
-              <h1>ToDo Planner</h1>
-            </div>
-            <div id="search-interface">
-              <div id="user-box">
-                <button id="user-button">login</button>
-              </div>
-              <div id="search-bar-container">
-                <input type="text" placeholder="Search..." id="search-bar">
-              </div>
-              <div id="filters-container">
-                <button id="filters-button" onclick="printList()">Filters</button>
-              </div>
-              <div id="add-container">
-                <button id="add-button" onclick="addToDo()"><span>+</span></button>
-              </div>
-            </div>
-          </header>
+      <!-- Header -->
+      <header>
+        <div id="title">
+          <h1>ToDo Planner</h1>
+        </div>
+        <div id="search-interface">
+          <div id="user-box">
+            <a href="login.html"><button id="user-button">login</button>
+            </a>
+          </div>
+          <div id="search-bar-container">
+            <input type="text" placeholder="Search..." id="search-bar">
+          </div>
+          <div id="filters-container">
+            <button id="filters-button" onclick="printList()">Filters</button>
+          </div>
+          <div id="add-container">
+            <button id="add-button" onclick="addToDo()"><span>+</span></button>
+          </div>
+        </div>
+      </header>
 
-          <!-- ToDo Items -->
+      <!-- ToDo Items -->
 
-          <div id="ToDo-Items">
-            <div class="ToDo-item">
-              <div class="checkbox">
-                <input type="checkbox">
-              </div>
-              <div class="ToDo-item-title">
-                <h3>Finish web assignment 2</h3>
-              </div>
-              <div class="ToDo-item-tags">
-                <div class="tag-title">
-                  <h4>Tags:</h4>
-                </div>
-                <div class="tag">
-                  <p>tag1</p>
-                </div>
-                <div class="tag">
-                  <p>tag2</p>
-                </div>
-              </div>
-              <div class="remove-container">
-                <button class="remove-button" onclick="removeToDo()">-</button>
-              </div>
+      <div id="ToDo-Items">
+        <div class="ToDo-item">
+          <div class="checkbox">
+            <input type="checkbox">
+          </div>
+          <div class="ToDo-item-title">
+            <h3>Finish web assignment 2</h3>
+          </div>
+          <div class="ToDo-item-tags">
+            <div class="tag-title">
+              <h4>Tags:</h4>
             </div>
-  
-            <div class="ToDo-item">
-              <div class="checkbox">
-                <input type="checkbox">
-              </div>
-              <div class="ToDo-item-title">
-                <h3>Finish Database assignment 2</h3>
-              </div>
-              <div class="ToDo-item-tags">
-                <div class="tag-title">
-                  <h4>Tags:</h4>
-                </div>
-                <div class="tag">
-                  <p>tag1</p>
-                </div>
-                <div class="tag">
-                  <p>tag2</p>
-                </div>
-              </div>
-              <div class="remove-container">
-                <button class="remove-button" onclick="removeToDo()">-</button>
-              </div>
+            <div class="tag">
+              <p>tag1</p>
             </div>
+            <div class="tag">
+              <p>tag2</p>
+            </div>
+          </div>
+          <div class="remove-container">
+            <button class="remove-button" onclick="removeToDo()">-</button>
+          </div>
+        </div>
+
+        <div class="ToDo-item">
+          <div class="checkbox">
+            <input type="checkbox">
+          </div>
+          <div class="ToDo-item-title">
+            <h3>Finish Database assignment 2</h3>
+          </div>
+          <div class="ToDo-item-tags">
+            <div class="tag-title">
+              <h4>Tags:</h4>
+            </div>
+            <div class="tag">
+              <p>tag1</p>
+            </div>
+            <div class="tag">
+              <p>tag2</p>
+            </div>
+          </div>
+          <div class="remove-container">
+            <button class="remove-button" onclick="removeToDo()">-</button>
           </div>
         </div>
       </div>
+    </div>
+  </div>
 </body>
+
 </html>

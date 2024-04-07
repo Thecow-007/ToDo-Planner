@@ -1,0 +1,126 @@
+:root{
+    --margin-padding: 9%;
+  }
+  
+  html{
+      height: 100%;
+  }
+  
+  body{
+      height: 100%;
+  }
+  
+  /* styling paper */
+  #paper {
+    height: 100%;
+    position: relative;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-color: rgb(248, 248, 243);
+    box-shadow: 0px 0px 5px 0px #888;
+  }
+    
+  /* styling margin red vertical line */
+  #paper::before {
+    content: '';
+    width: 2px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 8%;
+    background-color: rgba(255,0,0,0.6);
+  }
+    
+    /* styling blue horizontal lines */
+  #pattern {
+    height: 100%;
+    background-image: repeating-linear-gradient(rgb(248, 248, 243) 0px, rgb(248, 248, 243) 49px, teal 50px);
+  }
+
+  h1, .textfieldUsername, .textfieldPassword, .textfieldPassword2, .buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+.formcontainer {
+    
+    justify-content: center;
+    align-items: center;
+}
+
+#title{
+    font-size: 50px;
+    margin: 0px;
+    padding: 0px;
+    }
+
+.buttons {
+    position: relative;
+    margin: 5px;
+}
+
+#CreateAccount-button {
+    padding: 7px;
+    margin-top: 7px;
+}
+
+#Login-button {
+    padding: 7px;
+    margin-top: 5px;
+}
+
+.typingbox {
+    position: relative;
+    padding: 6px;
+}
+
+.textfieldUsername {
+    margin-top: 8px;
+    margin-bottom: 20px;
+    font-size: 30px;
+}
+
+.textfieldPassword {
+    margin-top: 34px;
+    margin-bottom: 25px;
+    font-size: 30px;
+}
+
+.textfieldPassword2 {
+    margin-top: 34px;
+    margin-bottom: 20px;
+    font-size: 30px;
+}
+
+#TextUsername, #TextPassword {
+    margin: 0px;
+    padding: 0px;;
+}
+
+h2 {
+    font-size: 13px;
+    font-weight: bolder;
+}
+
+#username, #pass, #pass2 {
+    border: 2px solid black;
+    border-radius: 2px;
+}
+
+#UserErrorText, #PassErrorText, #Pass2ErrorText {
+    position: absolute;
+}
+
+#UserErrorText {
+    top: 161px;
+}
+
+#PassErrorText {
+    top: 260px;
+}
+
+#Pass2ErrorText {
+    top: 359px;
+}
