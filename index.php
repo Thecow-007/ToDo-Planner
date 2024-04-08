@@ -21,7 +21,7 @@
             <h1 id="title">Login</h1>
 
             <div class="formcontainer">
-                <form action="index.html" method="get" onsubmit="return AccountLogin();">
+                <form action="./ToDo_HTML/ToDo.html" method="post" onsubmit="return AccountLogin();">
 
                     <div class="textfieldUsername">
                         <label for="username" id="TextUsername">Username</label>

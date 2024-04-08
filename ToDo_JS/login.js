@@ -1,4 +1,6 @@
+
 function AccountLogin() {
+    console.log("HHHHHH");
     var username = document.getElementById('username').value.trim();
     var pass = document.getElementById('pass').value;
 
@@ -28,6 +30,7 @@ function AccountLogin() {
 }
 
 function AccountCreate() {
+    console.log("HHHHHH");
     var username = document.getElementById('username').value.trim();
     var pass = document.getElementById('pass').value;
     var pass2 = document.getElementById('pass2').value;
@@ -41,72 +44,75 @@ function AccountCreate() {
     var pass2IsValid = pass2.length >= 6 && /[a-z]/.test(pass2) && /[A-Z]/.test(pass2) && pass === pass2;
     var complete = false;
 
-    if (usernameIsValid) {
-        usernameElement.style.borderColor = 'lightgreen';
-        document.getElementById('UserErrorText').style.display = 'none';
-    } else {
-        usernameElement.style.borderColor = 'red';
-        document.getElementById('UserErrorText').style.display = 'inline';
-        document.getElementById('UserErrorText').style.color = 'red';
-    }
-
-    if (passIsValid) {
-        passElement.style.borderColor = 'lightgreen';
-        document.getElementById('PassErrorText').style.display = 'none';
-    } else {
-        passElement.style.borderColor = 'red';
-        document.getElementById('PassErrorText').style.display = 'inline';
-        document.getElementById('PassErrorText').style.color = 'red';
-    }
-
-    if (pass2IsValid) {
-        pass2Element.style.borderColor = 'lightgreen';
-        document.getElementById('Pass2ErrorText').style.display = 'none';
-    } else {
-        pass2Element.style.borderColor = 'red';
-        document.getElementById('Pass2ErrorText').style.display = 'inline';
-        document.getElementById('Pass2ErrorText').style.color = 'red';
-    }
-
     if (usernameIsValid && passIsValid && pass2IsValid) {
-       window.location.assign("./index.html");
+       window.location.assign("./ToDo_HTML/ToDo.html");
     }
 
     return usernameIsValid && passIsValid && pass2IsValid;
 }
 
 function toIndex() {
-    window.location.href = "index.html";
+    window.location.href = "./ToDo_HTML/ToDo.html";
+}
+
+function validUsername() {
+    document.getElementById('UserBlankText').style.display = 'none';
+    document.getElementById('UserLengthText').style.display = 'none';
+    document.getElementById('UserErrorText').style.display = 'none';
+    usernameElement.style.borderColor = 'lightgreen';
 }
 
 function userAlreadyExists() {
-
+    document.getElementById('UserBlankText').style.display = 'none';
+    document.getElementById('UserLengthText').style.display = 'none';
+    usernameElement.style.borderColor = 'red';
     document.getElementById('UserErrorText').style.display = 'inline';
     document.getElementById('UserErrorText').style.color = 'red';
-
 }
 
 function mustIncludeUsername() {
+    document.getElementById('UserErrorText').style.display = 'none';
+    document.getElementById('UserLengthText').style.display = 'none';
+    usernameElement.style.borderColor = 'red';
     document.getElementById('UserBlankText').style.display = 'inline';
     document.getElementById('UserBlankText').style.color = 'red';
 }
 
-function mustIncludePassword() {
-
-}
-
-function mustRepeatPassword() {
-
-}
-
 function userMustBeLessThan20char() {
+    document.getElementById('UserErrorText').style.display = 'none';
+    document.getElementById('UserBlankText').style.display = 'none';
+    usernameElement.style.borderColor = 'red';
+    document.getElementById('UserLengthText').style.display = 'inline';
+    document.getElementById('UserLengthText').style.color = 'red';
+}
 
+function validPassword() {
+    passElement.style.borderColor = 'lightgreen';
+    document.getElementById('PassErrorText').style.display = 'none';
 }
 
 function passMustInclude() {
+    passElement.style.borderColor = 'red';
+    document.getElementById('PassErrorText').style.display = 'inline';
+    document.getElementById('PassErrorText').style.color = 'red';
+}
 
+function valid2ndPass() {
+    pass2Element.style.borderColor = 'lightgreen';
+    document.getElementById('Pass2ErrorText').style.display = 'none';
+    document.getElementById('Pass2BlankText').style.display = 'none';
+}
+
+function mustRepeatPassword() {
+    document.getElementById('Pass2ErrorText').style.display = 'none';
+    pass2Element.style.borderColor = 'red';
+    document.getElementById('Pass2BlankText').style.display = 'inline';
+    document.getElementById('Pass2BlankText').style.color = 'red';
 }
 
 function passDoNotMatch() {
-
+    document.getElementById('Pass2BlankText').style.display = 'none';
+    pass2Element.style.borderColor = 'red';
+    document.getElementById('Pass2ErrorText').style.display = 'inline';
+    document.getElementById('Pass2ErrorText').style.color = 'red';
 }
