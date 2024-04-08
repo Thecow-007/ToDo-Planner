@@ -7,18 +7,17 @@
     <title>ToDo: Create Account</title>
     <script src="../ToDo_JS/login.js"></script>
     <link rel="stylesheet" href="../ToDo_CSS/login.css">
+    <link rel="shortcut icon" href="#">
 </head>
 <?php
-    require_once 'db_connection.php';
-    require_once "../ToDo_PHP/AccountCheck.php";
-    openConnection();
+    require 'AccountCheck.php';
 ?>
 <body>
     <div id="paper">
         <div id="pattern">
             <div class="formcontainer">
                 <h1 id="title">Create Account</h1>
-                <form action="../ToDo_HTML/ToDo.html" method="post" onsubmit="return AccountCreate();">
+                <form action="../ToDo_HTML/ToDo.html" method="POST" onsubmit="return AccountCreate();">
 
                     <div class="textfieldUsername">
                         <label for="username">Username</label>

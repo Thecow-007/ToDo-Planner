@@ -1,5 +1,5 @@
 <?php 
-require 'db_connection.php';
+require_once 'db_connection.php';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST["username"];
     $password = $_POST["pass"];
@@ -75,7 +75,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $insertToUser = "INSERT INTO user (userName, userPassword) VALUES (:userName, :passWord)";
     $userCheck = $connection->prepare($insertToUser);
     $userCheck->bind_param(":userName", $username);
-    $userCheck->bind_param(":pasWord", $hashedPassword);
+    $userCheck->bind_param(":passWord", $hashedPassword);
     
     closeCon();
 }
