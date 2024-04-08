@@ -83,7 +83,7 @@ function userCheck($connection, $username){
 }
 
 function insertToUser($connection, $username, $hashedPassword){
-    $insertToUser = "INSERT INTO user (userName, userPassword) VALUES (". $username .", " . $hashedPassword . ");";
+    $insertToUser = "INSERT INTO user (userName, userPassword) VALUES ('" . $username . "', '" . $hashedPassword . "');";
     $userCheck = $connection->query($insertToUser);
     echo "Inserting User...";   
     // $userCheck->execute();

@@ -1,5 +1,5 @@
 <?php 
-    include 'db_connection.php';
+    include_once 'db_connection.php';
 
     // Check request method
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -32,16 +32,18 @@
 
         $passResult = passwordCheck($connection, $username,  $hashedPassword);
 
-        if($passResult->num_rows == 1){
-
+        if($passResult->num_rows != 1){
+            //ToDo JavaScript Function: Incorrect Password
         }
+
+        //ToDo implement password checking
+        //ToDO implement Logging in.
 
     }
 
     function userCheck($connection, $username){
-        $checkExistingUsernames = "SELECT * FROM user WHERE userName = :userName";
+        $checkExistingUsernames = "SELECT * FROM user WHERE userName = '" . $username . "';";
         $userCheck = $connection->prepare($checkExistingUsernames);
-        $userCheck->bind_param(":userName", $username);
         $userCheck->execute();
         $result = $userCheck->get_result();
         return $result;
