@@ -9,6 +9,11 @@ function toggleActive(elementID){
     element.classList.toggle('active');
     printList();
 }
+function toggleCrossed(elementID){
+    var element = document.getElementById(elementID);
+    element.classList.toggle('crossed');
+    printList();
+}
 
 function addToDo() {
     let defaultToDo = {
@@ -195,6 +200,7 @@ function addToDoEvents(ToDoItem){
     // Checkbox event listener
     itemCheckBox.addEventListener("click", function(){
         ToDoList[itemIndex].isChecked = !ToDoList[itemIndex].isChecked;
+        toggleCrossed("item-title" + itemIndex);
         printList();
     });
 }
@@ -347,9 +353,8 @@ function sortToDoList(){
     if(isByTag){
         ToDoList.sort((a, b) => {
             // Convert titles to lowercase for case-insensitive sorting
-            var tagA = a.tags[0].toLowerCase();
-            var tagB = b.tags[0].toLowerCase();
-        
+            var tagA = JSON.stringify(a.tags);
+            var tagB = JSON.stringify(b.tags);
             if (tagA < tagB) return -1;
             if (tagA > tagB) return 1;
             return 0;
@@ -364,6 +369,20 @@ function addFilterWindowListener(){
     });
 }
 
+function addSearchBarListener(){
+    let searchBar = document.getElementById('search-bar');
+    searchBar.addEventListener("keypress", function(event){
+        if(event.key === "Enter"){
+            printList();
+        }
+    })
+}
+
+function addDefaultisteners(){
+    addFilterWindowListener();
+    addSearchBarListener();
+}
+
 function searchToDoList(){
     var output = [];
     var searchElement = document.getElementById('search-bar');
@@ -371,6 +390,8 @@ function searchToDoList(){
     const regex = new RegExp(".*" + searchVal + ".*");
     for(item of ToDoList){
         if(regex.test(item.title)){
+            output.push(item);
+        } else if(regex.test(JSON.stringify(item.tags))){
             output.push(item);
         }
     }
@@ -380,4 +401,4 @@ function searchToDoList(){
 //ToDo: remove before submit:
 addTestToDo(); //populates the array with some test info. 
 
-addFilterWindowListener(); //adds the listener to the sort window
+addDefaultisteners();//adds the listeners which arent removed every printlist.
