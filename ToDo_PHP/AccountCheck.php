@@ -5,47 +5,57 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST["pass"];
     $password2 = $_POST["pass2"];
 
-    if (empty($username)) {
+    if (strlen($username) <= 20 && !empty($username)) {
         echo '<script>';
-        echo 'mustIncludeUsername();';
+        echo 'validUsername();';
         echo '</script>';
-        exit;
     }
+            if (empty($username)) {
+            echo '<script>';
+            echo 'mustIncludeUsername();';
+            echo '</script>';
+            exit;
+        }
+            if (strlen($username) > 20) {
+            echo '<script>';
+            echo 'userMustBeLessThan20char();';
+            echo '</script>';
+            exit;
+        }
 
-    if (empty($password)) {
-        echo '<script>';
-        echo 'mustIncludePassword();';
-        echo '</script>';
-        exit;
-    }
 
-    if (empty($password2)) {
+    if (strlen($password) > 6 && !empty($password) && preg_match('/^(?=.*[a-z])(?=.*[A-Z]).{6,}$/', $password)) {
         echo '<script>';
-        echo 'mustRepeatPassword();';
+        echo 'validPassword();';
         echo '</script>';
-        exit;
-    }
+    } 
 
-    if (strlen($username) > 20) {
-        echo '<script>';
-        echo 'userMustBeLessThan20char();';
-        echo '</script>';
-        exit;
-    }
+            if (strlen($password) < 6 || !preg_match('/^(?=.*[a-z])(?=.*[A-Z]).{6,}$/', $password)) {
+            echo '<script>';
+            echo 'passMustInclude();';
+            echo '</script>';
+            exit;
+        }
+    
 
-    if (strlen($password) < 6 || !preg_match('/^(?=.*[a-z])(?=.*[A-Z]).{6,}$/', $password)) {
+    if (strlen($password2) > 6 && $password == $password2) {
         echo '<script>';
-        echo 'passMustInclude();';
+        echo 'valid2ndPass();';
         echo '</script>';
-        exit;
     }
-
-    if (strlen($password2) < 6 || $password !== $password2) {
-        echo '<script>';
-        echo 'passDoNotMatch();';
-        echo '</script>';
-        exit;
-    }
+            if (empty($password2)) {
+            echo '<script>';
+            echo 'mustRepeatPassword();';
+            echo '</script>';
+            exit;
+        }
+            if (strlen($password2) < 6 || $password !== $password2) {
+            echo '<script>';
+            echo 'passDoNotMatch();';
+            echo '</script>';
+            exit;
+        }
+    
 
     $checkExistingUsernames = "SELECT * FROM user WHERE userName = :userName";
     $userCheck = $connection->prepare($checkExistingUsernames);
@@ -53,13 +63,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $userCheck->execute();
     $result = $userCheck->get_result();
 
-    if ($result->num_rows > 0) {
-
-        echo '<script>';
-        echo 'userAlreadyExists();';
-        echo '</script>';
-        exit;
-    }
+    // if ($result->num_rows > 0) {
+    //     echo '<script>';
+    //     echo 'userAlreadyExists();';
+    //     echo '</script>';
+    //     exit;
+    // }
 
     $hashedPassword = hash('sha256', $password);
 
