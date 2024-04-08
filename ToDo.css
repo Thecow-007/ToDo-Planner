@@ -1,9 +1,23 @@
 :root{
   --margin-padding: 9%;
+
+  /* Tag Colors */
+  --color0: #4CE0B3;
+  --color1: #6dbdf2;
+  --color2: #F1DB4B;
+  --color3: #F9E784;
+  --color4: #dbaecf;
+  --color5: #a8ceb0;
+  --color6: #fcaeae;
+  --color7: #E6ADEC;
+  --color8: #69DDFF;
+  --color9: #B4CDED;
+  --color10: #BFCC94;
 }
 
 html{
-    height: 100%;
+    min-height: 100%;
+    height: 100vh;
 }
 
 body{
@@ -12,7 +26,7 @@ body{
 
 /* styling paper */
 #paper {
-  height: 100%;
+  /* height: 100%; */
   position: relative;
   padding-top: 40px;
   padding-bottom: 40px;
@@ -119,24 +133,30 @@ header{
 
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 
 .ToDo-item-title{
   font-size: 120%;
 }
 
+.crossed{
+  text-decoration: line-through;
+  background-color: red;
+}
+
 .ToDo-item-tags{
   display: flex;
   justify-content: space-evenly;
+  align-items: center;
   margin-left: auto;
-  margin-right: 100px;
 }
 
-.tag{
-  margin: 5px;
+.item-tag-bar{
+  height: 50%;
 }
 
-input[type="checkbox"]{
+.checkbox input[type="checkbox"]{
   height: 20px;
   width: 20px;
 }
@@ -149,4 +169,78 @@ input[type="checkbox"]{
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+/* All Tags: */
+.tag{
+  margin: 5px;
+  border-radius: 25%;
+
+  /* Padding */
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+.tag p{
+  display: inline;
+
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+/* Tag Colors */
+.tag0{
+  background-color: var(--color0);
+}
+.tag1{
+  background-color: var(--color1);
+}
+.tag2{
+  background-color: var(--color2);
+}
+.tag3{
+  background-color: var(--color3);
+}
+.tag4{
+  background-color: var(--color4);
+}
+.tag5{
+  background-color: var(--color5);
+}
+.tag6{
+  background-color: var(--color6);
+}
+.tag7{
+  background-color: var(--color7);
+}
+.tag8{
+  background-color: var(--color8);
+}
+.tag9{
+  background-color: var(--color9);
+}
+.tag10{
+  background-color: var(--color10);
+}
+
+/* Sort Window */
+.active{
+  display: none;
+}
+
+#sort-window{
+  z-index: 1000;
+  position: absolute;
+  right: 0px;
+  background-color: white;
+  border-radius: 5%;
+  border: 2px solid slategray;
+  padding: 5px;
+  justify-self: right;
+}
+
+#sort-title{
+  margin-top: 0px;
+  margin-bottom: 5px;
 }
