@@ -9,15 +9,16 @@
     <link rel="stylesheet" href="../ToDo_CSS/login.css">
 </head>
 <?php
-    require 'db_connection.php';
-    openConnection();
+    require_once 'db_connection.php';
+    require_once 'AccountCheck.php';
+    $connection = openConnection();
 ?>
 <body>
     <div id="paper">
         <div id="pattern">
             <div class="formcontainer">
                 <h1 id="title">Create Account</h1>
-                <form action="../ToDo_HTML/ToDo.html" method="POST" onsubmit="return AccountCreate();">
+                <form action="./CreateAccount.php" method="POST" onsubmit="return AccountCreate();">
 
                     <div class="textfieldUsername">
                         <label for="username">Username</label>

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ToDo: Login</title>
-    <script src="./login.js"></script>
+    <script src="./ToDo_JS/login.js"></script>
     <link rel="stylesheet" href="./ToDo_CSS/login.css">
 </head>
 
@@ -21,7 +21,7 @@
             <h1 id="title">Login</h1>
 
             <div class="formcontainer">
-                <form action="index.html" method="get" onsubmit="return AccountLogin();">
+                <form action="./ToDo_HTML/ToDo.html" method="post" onsubmit="return AccountLogin();">
 
                     <div class="textfieldUsername">
                         <label for="username" id="TextUsername">Username</label>
