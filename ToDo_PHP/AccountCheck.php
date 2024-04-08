@@ -7,42 +7,42 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (empty($username)) {
         echo '<script>';
-        echo 'userAlreadyExists();';
+        echo 'mustIncludeUsername();';
         echo '</script>';
         exit;
     }
 
     if (empty($password)) {
         echo '<script>';
-        echo 'userAlreadyExists();';
+        echo 'mustIncludePassword();';
         echo '</script>';
         exit;
     }
 
     if (empty($password2)) {
         echo '<script>';
-        echo 'userAlreadyExists();';
+        echo 'mustRepeatPassword();';
         echo '</script>';
         exit;
     }
 
     if (strlen($username) > 20) {
         echo '<script>';
-        echo 'userAlreadyExists();';
+        echo 'userMustBeLessThan20char();';
         echo '</script>';
         exit;
     }
 
     if (strlen($password) < 6 || !preg_match('/^(?=.*[a-z])(?=.*[A-Z]).{6,}$/', $password)) {
         echo '<script>';
-        echo 'userAlreadyExists();';
+        echo 'passMustInclude();';
         echo '</script>';
         exit;
     }
 
     if (strlen($password2) < 6 || $password !== $password2) {
         echo '<script>';
-        echo 'userAlreadyExists();';
+        echo 'passDoNotMatch();';
         echo '</script>';
         exit;
     }

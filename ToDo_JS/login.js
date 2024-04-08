@@ -85,3 +85,28 @@ function userAlreadyExists() {
     document.getElementById('UserErrorText').style.color = 'red';
 
 }
+
+function mustIncludeUsername() {
+    document.getElementById('UserBlankText').style.display = 'inline';
+    document.getElementById('UserBlankText').style.color = 'red';
+}
+
+function mustIncludePassword() {
+
+}
+
+function mustRepeatPassword() {
+
+}
+
+function userMustBeLessThan20char() {
+
+}
+
+function passMustInclude() {
+
+}
+
+function passDoNotMatch() {
+
+}
