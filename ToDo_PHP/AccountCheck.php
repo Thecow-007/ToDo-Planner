@@ -1,12 +1,6 @@
 <?php 
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
-    $servername = "localhost";
-    $dbUsername = "root";
-    $dbPassword = null;
-    $dbName = "todo_planner";
-    $port = 5505;
+require 'db_connection.php';
+if ($_SERVER["REQUEST_METHOD"] == "POST") 
     $username = $_POST["username"];
     $password = $_POST["pass"];
     $password2 = $_POST["pass2"];
