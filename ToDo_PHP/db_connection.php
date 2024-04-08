@@ -9,7 +9,7 @@
         return $connection;
     }
     
-    function CloseCon($conn){
+    function closeCon($conn){
         $conn -> close();
     }
 ?>

@@ -1,6 +1,6 @@
 <?php 
 require 'db_connection.php';
-if ($_SERVER["REQUEST_METHOD"] == "POST") 
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST["username"];
     $password = $_POST["pass"];
     $password2 = $_POST["pass2"];
@@ -47,9 +47,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
         exit;
     }
 
-    $checkExistingUsernames = "SELECT * FROM user WHERE userName = ?";
+    $checkExistingUsernames = "SELECT * FROM user WHERE userName = :userName";
     $userCheck = $connection->prepare($checkExistingUsernames);
-    $userCheck->bind_param("s", $username);
+    $userCheck->bind_param(":userName", $username);
     $userCheck->execute();
     $result = $userCheck->get_result();
 
@@ -63,11 +63,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 
     $hashedPassword = hash('sha256', $password);
 
-    $insertToUser = "INSERT INTO user (userName, userPassword) VALUES (?, ?)";
+    $insertToUser = "INSERT INTO user (userName, userPassword) VALUES (:userName, :passWord)";
     $userCheck = $connection->prepare($insertToUser);
-    $userCheck->bind_param("ss", $username, $hashedPassword);
-    $connection->close();
+    $userCheck->bind_param(":userName", $username);
+    $userCheck->bind_param(":pasWord", $hashedPassword);
     
+    closeCon();
 }
 
 ?>
