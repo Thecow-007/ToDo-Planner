@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit;
     }
 
-    if ($username === '' || strlen($username) > 20) {
+    if (strlen($username) > 20) {
         echo '<script>';
         echo 'userAlreadyExists();';
         echo '</script>';
