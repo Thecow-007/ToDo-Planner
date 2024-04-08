@@ -74,3 +74,14 @@ function AccountCreate() {
 
     return usernameIsValid && passIsValid && pass2IsValid;
 }
+
+function toIndex() {
+    window.location.href = "index.html";
+}
+
+function userAlreadyExists() {
+
+    document.getElementById('UserErrorText').style.display = 'inline';
+    document.getElementById('UserErrorText').style.color = 'red';
+
+}
