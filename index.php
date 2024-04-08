@@ -9,6 +9,11 @@
     <link rel="stylesheet" href="./ToDo_CSS/login.css">
 </head>
 
+<?php
+    require './ToDo_PHP/db_connection.php';
+    openConnection();
+?>
+
 <body>
     <div id="paper">
         <div id="pattern">
@@ -16,7 +21,7 @@
             <h1 id="title">Login</h1>
 
             <div class="formcontainer">
-                <form action="login.html" method="get" onsubmit="return AccountLogin();">
+                <form action="index.html" method="get" onsubmit="return AccountLogin();">
 
                     <div class="textfieldUsername">
                         <label for="username" id="TextUsername">Username</label>
@@ -36,7 +41,7 @@
                 </form>
 
                 <div id="user-box" class="buttons">
-                    <a href="./CreateAccount.html"><button id="CreateAccount-button">Create New Account</button>
+                    <a href="./ToDo_PHP/CreateAccount.php"><button id="CreateAccount-button">Create New Account</button>
                     </a>
                 </div>
 
