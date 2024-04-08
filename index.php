@@ -9,6 +9,11 @@
     <link rel="stylesheet" href="./ToDo_CSS/login.css">
 </head>
 
+<?php
+    require './ToDo_PHP/db_connection.php';
+    openConnection();
+?>
+
 <body>
     <div id="paper">
         <div id="pattern">
@@ -36,7 +41,7 @@
                 </form>
 
                 <div id="user-box" class="buttons">
-                    <a href="./ToDo_HTML/CreateAccount.html"><button id="CreateAccount-button">Create New Account</button>
+                    <a href="./ToDo_PHP/CreateAccount.php"><button id="CreateAccount-button">Create New Account</button>
                     </a>
                 </div>
 

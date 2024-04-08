@@ -47,8 +47,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
         exit;
     }
 
-    $connection = mysqli_connect($servername, $dbUsername, $dbPassword, $dbName, $port);
-
     $checkExistingUsernames = "SELECT * FROM user WHERE userName = ?";
     $userCheck = $connection->prepare($checkExistingUsernames);
     $userCheck->bind_param("s", $username);

@@ -8,7 +8,10 @@
     <script src="../ToDo_JS/login.js"></script>
     <link rel="stylesheet" href="../ToDo_CSS/login.css">
 </head>
-
+<?php
+    require 'db_connection.php';
+    openConnection();
+?>
 <body>
     <div id="paper">
         <div id="pattern">
