@@ -1,9 +1,12 @@
+
+
 <?php 
 require_once 'db_connection.php';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST["username"];
     $password = $_POST["pass"];
     $password2 = $_POST["pass2"];
+
 
     $conn = openConnection();
 
@@ -40,11 +43,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $result = userCheck($conn, $username);
 
     if ($result->num_rows > 0) {
-
+        $userIsNew = false;
         echo '<script>';
         echo 'userAlreadyExists();';
         echo '</script>';
         exit;
+    } else {
+        $userIsNew = true;
     }
 
     $hashedPassword = hash('sha256', $password);
@@ -74,5 +79,4 @@ function redirect($url) {
     header('Location: '.$url);
     die();
 }
-
 ?>
