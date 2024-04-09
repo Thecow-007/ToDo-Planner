@@ -1,3 +1,4 @@
+/* COLE */
 
 /* COLE */
 function AccountLogin() {
@@ -35,11 +36,39 @@ function AccountCreate() {
     var usernameElement = document.getElementById('username');
     var passElement = document.getElementById('pass');
     var pass2Element = document.getElementById('pass2');
+    var usernameElement = document.getElementById('username');
+    var passElement = document.getElementById('pass');
+    var pass2Element = document.getElementById('pass2');
 
     var usernameIsValid = username !== '' && username.length <= 20;
     var passIsValid = pass.length >= 6 && /[a-z]/.test(pass) && /[A-Z]/.test(pass);
     var pass2IsValid = pass2.length >= 6 && /[a-z]/.test(pass2) && /[A-Z]/.test(pass2) && pass === pass2;
 
+    // Checks if inputs are valid
+    if (usernameIsValid) {
+        usernameElement.style.borderColor = 'lightgreen';
+        document.getElementById('UserErrorText').innerText = ' ';
+    }
+    if (passIsValid) {
+        passElement.style.borderColor = 'lightgreen';
+        document.getElementById('PassErrorText').innerText = ' ';
+    }
+    if (pass2IsValid) {
+        pass2Element.style.borderColor = 'lightgreen';
+        document.getElementById('Pass2ErrorText').innerText = ' ';
+    }
+
+    // Checks for username specific errors
+    if (username.length > 20) {
+        document.getElementById('UserErrorText').innerText = '*Must Be Less Than or Equal To 20 Characters.';
+        usernameElement.style.borderColor = 'red';
+        document.getElementById('UserErrorText').style.color = 'red';
+    }
+    if (username === '') {
+        document.getElementById('UserErrorText').innerText = '*Must Include Username.';
+        usernameElement.style.borderColor = 'red';
+        document.getElementById('UserErrorText').style.color = 'red';
+    }
     // Checks if inputs are valid
     if (usernameIsValid) {
         usernameElement.style.borderColor = 'lightgreen';
