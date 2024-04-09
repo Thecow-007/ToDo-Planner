@@ -23,7 +23,6 @@
 
             <div class="formcontainer">
                 <form action="./index.php" method="post" onsubmit="return AccountLogin();">
-
                     <div class="textfieldUsername">
                         <label for="username" id="TextUsername">Username</label>
                         <input type="text" name="username" id="username" placeholder="Username" class="typingbox">
