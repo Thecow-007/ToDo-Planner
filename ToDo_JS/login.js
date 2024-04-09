@@ -1,6 +1,4 @@
 /* COLE */
-
-/* COLE */
 function AccountLogin() {
     var username = document.getElementById('username').value.trim();
     var pass = document.getElementById('pass').value;
