@@ -10,73 +10,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $conn = openConnection();
 
+    $cleanInput = true;
+
     if (empty($username)) {
-        echo '<script>';
-        echo 'userAlreadyExists();';
-        echo '</script>';
-        exit;
+        $cleanInput = false;
     }
 
-    if (strlen($username) <= 20 && !empty($username)) {
-        $validUsername = true;
-        echo '<script>';
-        echo 'validUsername();';
-        echo '</script>';
-        
+    if (empty($password)) {
+        $cleanInput = false;
     }
-            if (empty($username)) {
-            $validUsername = false;
-            echo '<script>';
-            echo 'mustIncludeUsername();';
-            echo '</script>';
-            exit;
-        }
-            if (strlen($username) > 20) {
-            $validUsername = false;
-            echo '<script>';
-            echo 'userMustBeLessThan20char();';
-            echo '</script>';
-            exit;
-        }
 
-
-    if (strlen($password) > 6 && !empty($password) && preg_match('/^(?=.*[a-z])(?=.*[A-Z]).{6,}$/', $password)) {
-        $validPassword = true;
-        echo '<script>';
-        echo 'validPassword();';
-        echo '</script>';
-    } 
-
-            if (strlen($password) < 6 || !preg_match('/^(?=.*[a-z])(?=.*[A-Z]).{6,}$/', $password)) {
-            $validPassword = false;
-            echo '<script>';
-            echo 'passMustInclude();';
-            echo '</script>';
-            exit;
-        }
-    
-
-    if (strlen($password2) > 6 && $password == $password2) {
-        $valid2ndPass = true;
-        echo '<script>';
-        echo 'valid2ndPass();';
-        echo '</script>';
+    if (empty($password2)) {
+        $cleanInput = false;
     }
-            if (empty($password2)) {
-            $valid2ndPass = false;
-            echo '<script>';
-            echo 'mustRepeatPassword();';
-            echo '</script>';
-            exit;
-        }
-            if (strlen($password2) < 6 || $password !== $password2) {
-            $valid2ndPass = false;
-            echo '<script>';
-            echo 'passDoNotMatch();';
-            echo '</script>';
-            exit;
-        }
-    
+
+    if (strlen($username) > 20) {
+        $cleanInput = false;
+    }
+
+    if (strlen($password) < 6 || !preg_match('/^(?=.*[a-z])(?=.*[A-Z]).{6,}$/', $password)) {
+        $cleanInput = false;
+    }
+
+    if (strlen($password2) < 6 || $password !== $password2) {
+        $cleanInput = false;
+    }
+
+    if(!$cleanInput){ /if unclean output, send them back to creat account page
+        redirect("http://localhost/ToDo_PHP/CreateAccount.php");
+    }
 
     $result = userCheck($conn, $username);
 
@@ -91,12 +53,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     $hashedPassword = hash('sha256', $password);
-    $toHash = "DanielPassword";
-
-    echo "<script>";
-    echo "var hashResult = " . hash('sha256', $toHash);
-    echo "console.log(hashResult);";
-    echo "</script>";
 
     insertToUser($conn, $username, $hashedPassword);
 
@@ -122,10 +78,5 @@ function insertToUser($connection, $username, $hashedPassword){
 function redirect($url) {
     header('Location: '.$url);
     die();
-}
-
-
-    return $validUsername && $validPassword && $valid2ndPass && $userIsNew;
-}
 }
 ?>
