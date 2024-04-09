@@ -7,46 +7,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $conn = openConnection();
 
+    $cleanInput = true;
+
     if (empty($username)) {
-        echo '<script>';
-        echo 'userAlreadyExists();';
-        echo '</script>';
-        exit;
+        $cleanInput = false;
     }
 
     if (empty($password)) {
-        echo '<script>';
-        echo 'userAlreadyExists();';
-        echo '</script>';
-        exit;
+        $cleanInput = false;
     }
 
     if (empty($password2)) {
-        echo '<script>';
-        echo 'userAlreadyExists();';
-        echo '</script>';
-        exit;
+        $cleanInput = false;
     }
 
     if (strlen($username) > 20) {
-        echo '<script>';
-        echo 'userAlreadyExists();';
-        echo '</script>';
-        exit;
+        $cleanInput = false;
     }
 
     if (strlen($password) < 6 || !preg_match('/^(?=.*[a-z])(?=.*[A-Z]).{6,}$/', $password)) {
-        echo '<script>';
-        echo 'userAlreadyExists();';
-        echo '</script>';
-        exit;
+        $cleanInput = false;
     }
 
     if (strlen($password2) < 6 || $password !== $password2) {
-        echo '<script>';
-        echo 'userAlreadyExists();';
-        echo '</script>';
-        exit;
+        $cleanInput = false;
+    }
+
+    if(!$cleanInput){ /if unclean output, send them back to creat account page
+        redirect("http://localhost/ToDo_PHP/CreateAccount.php");
     }
 
     $result = userCheck($conn, $username);
@@ -60,12 +48,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     $hashedPassword = hash('sha256', $password);
-    $toHash = "DanielPassword";
-
-    echo "<script>";
-    echo "var hashResult = " . hash('sha256', $toHash);
-    echo "console.log(hashResult);";
-    echo "</script>";
 
     insertToUser($conn, $username, $hashedPassword);
 
