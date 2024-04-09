@@ -2,7 +2,6 @@
 let ToDoList = [];
 let ToDoItems = [];
 let tagList = [];
-// let colorArray = ["#0E6BA8", "#F1DB4B","#F9E784","#B37BA4", "#84A98C","#D05353", "#E6ADEC", "#69DDFF", "#B4CDED", "#4CE0B3",  "#BFCC94"];
 
 // toggles the class 'active' to the object with given ID
 function toggleActive(elementID) {
@@ -135,21 +134,6 @@ function removeTag(index, oldTag) {
     if (tagIndex !== -1) { // If oldTag is found in the array
         ToDoList[index].tags.splice(tagIndex, 1); // Remove oldTag from the tags array
     }
-}
-
-// We will use this function to find out the index of each ToDo item based on its location in the list. (maybe not)
-function countElementsAbove(targetId) {
-    var targetElement = document.getElementById(targetId);
-    var count = 0;
-
-    // Loop through previous siblings
-    var sibling = targetElement.previousElementSibling;
-    while (sibling) {
-        count++;
-        sibling = sibling.previousElementSibling;
-    }
-
-    return count;
 }
 
 function removeToDo(index) {
