@@ -1,20 +1,21 @@
 <?php
     require_once 'db_connection.php';
     require_once 'handyFunctions.php';
-    $connection = openConnection();
-    $ToDoListJSON = "";
-
     session_start();
+    $connection = openConnection();
 
-    if (!isset($_SESSION['username'])){
-        redirect("http://localhost/akuhsbdoasd");
+    
+
+    if (!isset($_SESSION['username']) || !isset($_SESSION['todo-item'])){
+        redirect("http://localhost");
     }
 
-    //get Username passed from login screen
+    //get Username passed from login screen + user's todo-item
     $username = $_SESSION['username'];
+    $ToDoListJSON = $_SESSION['todo-item'];
+    
 
-    //Plan:
-    //Take in new ToDoList if exists:
+    //Take in new ToDoList from save button with POST:
         //Delete all items by user
         //Insert all items by user
 
@@ -46,14 +47,9 @@
         $delItems->execute();
 
         //Insert all of the new Items
-        $addItemsQ = "Insert into `todo-item`(userID, `item-JSON`) Values('" . $userID . "', '" . $ToDoListJSON . "')";
+        $addItemsQ = "Insert into `todo-item`(userID, `item-JSON`) Values( '" . $userID . "', '" . $ToDoListJSON . "' )";
         $addItems = $connection->prepare($addItemsQ);
         $addItems->execute();
     }
 
 ?>
-<script defer>
-    console.log("<?php echo json_decode($ToDoListJSON); ?>");
-    // console.log("HELPPPP" + ToDoList);
-    printList();
-</script>

@@ -1,0 +1,6 @@
+Please use the create-todo-DB.sql code to genereate the database in PHPMyAdmin before using.
+
+*Please note, The DATABASE USERNAME is "ToDoUser" and the DATABASE USER PASSWORD IS "ToDoUserPassword".
+*This means you must either create that user if you do not have it in your database, or
+*change ToDo_PHP/db_connection.php to reflect a user you like.
+*Please see ToDo_PHP/db_connection.php if you are still confused.
