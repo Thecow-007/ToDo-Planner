@@ -1,12 +1,11 @@
 
-
+<!-- DANIEL & COLE -->
 <?php 
 require_once 'db_connection.php';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST["username"];
     $password = $_POST["pass"];
     $password2 = $_POST["pass2"];
-
 
     $conn = openConnection();
 
@@ -36,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $cleanInput = false;
     }
 
-    if(!$cleanInput){ /if unclean output, send them back to creat account page
+    if(!$cleanInput){ //if unclean output, send them back to creat account page
         redirect("http://localhost/ToDo_PHP/CreateAccount.php");
     }
 
