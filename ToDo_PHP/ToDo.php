@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
+<!-- Please Note: The paper effect seen here was sourced from https://www.codesdope.com/blog/article/getting-notebook-paper-effect-with-css/,
+Then altered for use on this page. -->
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../ToDo_CSS/ToDo.css">
-  <title>ToDo Planner</title>
-  <script defer src="../ToDo_JS/ToDoItem.js"></script> 
+  <title>ToDo Planner</title> 
 </head>
-<?php
-    require_once 'ToDoSave.php';
-?>
 <body>
   <div id="paper">
     <div id="pattern">
@@ -20,7 +20,6 @@
         </div>
         <div id="search-interface">
           <div id="save-button-container">
-            <!-- ToDo: implement item saving via clicking this button. -->
             <button id="save-button">save</button> 
           </div>
           <div id="user-box">
@@ -42,13 +41,6 @@
       <!-- Sort Dialogue -->
       <div id="sort-window" class="active">
         <h4 id="sort-title">Sort:</h4>
-        <!-- <div id="date-buttons-container">
-          <label for="latest-button">Date:</label>
-          <input type="radio" id="latest-button" name="date-buttons">
-          <label for="latest-button">Latest to Oldest</label>
-          <input type="radio" id="oldest-button" name="date-buttons">
-          <label for="oldest-button">Oldest to Latest</label>
-        </div> -->
         <div id="name-buttons-container">
           <label for="alpha-button">Name:</label>
           <input class="filter" type="radio" id="alpha-button" name="name-buttons">
@@ -63,33 +55,18 @@
       </div>
 
       <!-- ToDo Items -->
-
       <div id="ToDo-Items">
-        <!-- <div class="ToDo-item">
-          <div class="checkbox">
-            <input type="checkbox">
-          </div>
-          <div class="ToDo-item-title">
-            <h3>Finish web assignment 2</h3>
-          </div>
-          <div class="ToDo-item-tags">
-            <div class="tag-title">
-              <h4>Tags:</h4>
-            </div>
-            <div class="tag">
-              <p>tag1</p>
-            </div>
-            <div class="tag">
-              <p>tag2</p>
-            </div>
-          </div>
-          <div class="remove-container">
-            <button class="remove-button" onclick="removeToDo()">-</button>
-          </div>
-        </div> -->
+      <script src="../ToDo_JS/ToDoItem.js"></script>
       </div>
     </div>
   </div>
 </body>
-
+<!-- Pls let this Work-->
+<?php
+    require_once 'ToDoSave.php';
+    echo "<script>
+    ToDoList = JSON.parse('$ToDoListJSON');
+    printList();
+    </script>";
+?>
 </html>

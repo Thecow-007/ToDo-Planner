@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<!-- Please Note: The paper effect seen here was sourced from https://www.codesdope.com/blog/article/getting-notebook-paper-effect-with-css/,
+Then altered for use on this page. -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

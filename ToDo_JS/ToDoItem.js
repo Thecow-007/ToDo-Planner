@@ -440,7 +440,7 @@ function searchToDoList() {
 }
 
 //ToDo: remove before submit:
-addTestToDo(); //populates the array with some test info. 
+// addTestToDo(); //populates the array with some test info. 
 
 addDefaultisteners();//adds the listeners which arent removed every printlist.
 
