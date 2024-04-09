@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ToDo: Login</title>
-    <script src="./login.js"></script>
+    <script src="../ToDo_JS\login.js"></script>
     <link rel="stylesheet" href="./ToDo_CSS/login.css">
 </head>
 
