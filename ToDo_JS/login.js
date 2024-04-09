@@ -111,8 +111,3 @@ function passDoNotMatch() {
     document.getElementById('Pass2ErrorText').style.display = 'inline';
     document.getElementById('Pass2ErrorText').style.color = 'red';
 }
-
-function logTest() {
-    console.log("HHHHHH");
-    return false;
-}

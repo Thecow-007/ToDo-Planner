@@ -2,6 +2,7 @@
 
 <?php 
 require_once 'db_connection.php';
+require_once 'handyFunctions.php';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST["username"];
     $password = $_POST["pass"];
@@ -36,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $cleanInput = false;
     }
 
-    if(!$cleanInput){ /if unclean output, send them back to creat account page
+    if(!$cleanInput){ //if unclean output, send them back to creat account page
         redirect("http://localhost/ToDo_PHP/CreateAccount.php");
     }
 
@@ -73,10 +74,5 @@ function insertToUser($connection, $username, $hashedPassword){
     $userCheck = $connection->query($insertToUser);
     echo "Inserting User...";   
     // $userCheck->execute();
-}
-
-function redirect($url) {
-    header('Location: '.$url);
-    die();
 }
 ?>
