@@ -4,12 +4,12 @@ let tagList = [];
 // let colorArray = ["#0E6BA8", "#F1DB4B","#F9E784","#B37BA4", "#84A98C","#D05353", "#E6ADEC", "#69DDFF", "#B4CDED", "#4CE0B3",  "#BFCC94"];
 
 // toggles the class 'active' to the object with given ID
-function toggleActive(elementID){
+function toggleActive(elementID) {
     var element = document.getElementById(elementID);
     element.classList.toggle('active');
     printList();
 }
-function toggleCrossed(elementID){
+function toggleCrossed(elementID) {
     var element = document.getElementById(elementID);
     element.classList.toggle('crossed');
     printList();
@@ -26,7 +26,7 @@ function addToDo() {
     printList();
 }
 //ToDo: Remove this function before submit. Just adds test items to the ToDoList.
-function addTestToDo(){
+function addTestToDo() {
     let searchBar = {
         isChecked: false,
         title: "Create Search bar function.",
@@ -75,7 +75,7 @@ function appendToDo(item, index) {
 
 function incrementTagColorCounter(amount) {
     let tagColorCounter = 0;
-    for(var i = 0; i < amount; i++){
+    for (var i = 0; i < amount; i++) {
         // Check if counter has reached 11, if so reset it to 0
         if (tagColorCounter > 10) {
             tagColorCounter = 0;
@@ -83,11 +83,11 @@ function incrementTagColorCounter(amount) {
         tagColorCounter++;
     }
     return tagColorCounter;
-  }
+}
 
-function generateTag(index){
+function generateTag(index) {
     var tagString = ``;
-    for(var i = 0; i < ToDoList[index].tags.length; i++){
+    for (var i = 0; i < ToDoList[index].tags.length; i++) {
         var colorIndex = incrementTagColorCounter(tagList.indexOf(ToDoList[index].tags[i]));
         tagString += `<div class="tag${colorIndex} tag" id="item${index}-tag${i}"><p>${ToDoList[index].tags[i]}</p></div>`;
     }
@@ -110,14 +110,14 @@ function setDate(index, newDate) {
 function addTag(index, newTag) {
     var isIndexTag = ToDoList[index].tags.indexOf(newTag);
     var isTag = tagList.indexOf(newTag);
-    if(isTag == -1 && isIndexTag == -1){
+    if (isTag == -1 && isIndexTag == -1) {
         tagList.push(newTag);
         ToDoList[index].tags.push(newTag);
         return true;
-    } else if(isTag == -1){
+    } else if (isTag == -1) {
         tagList.push(newTag);
         return true;
-    } else if(isIndexTag == -1){
+    } else if (isIndexTag == -1) {
         ToDoList[index].tags.push(newTag);
         return true;
     }
@@ -160,6 +160,9 @@ function removeToDo(index) {
 }
 
 function printList() {
+    if(ToDoItems == null || document.getElementById('ToDo-Items') == null){
+        return false;
+    }
     // copy ToDoList into ToDoItems
     ToDoItems = JSON.parse(JSON.stringify(ToDoList));
     //ToDo: apply filters and search functions
@@ -177,28 +180,28 @@ function printList() {
     ToDoList = JSON.parse(JSON.stringify(ToDoItems));
 }
 
-function addToDoEvents(ToDoItem){
+function addToDoEvents(ToDoItem) {
     var itemId = ToDoItem.id;
-    var itemIndex  = itemId.substring(4);
+    var itemIndex = itemId.substring(4);
     var itemTitle = document.getElementById("item-title" + itemIndex);
     var itemTags = tagsToArray(itemIndex);
     var itemCheckBox = document.getElementById("item-checkbox" + itemIndex);
 
     // Add the event listeners
     // Title event listener
-    itemTitle.addEventListener("click", function() {
+    itemTitle.addEventListener("click", function () {
         gatherTitleInput(itemIndex);
     });
 
     // Tags Event listener
-    itemTags.forEach(function(element){
-        element.addEventListener("click", function(){
+    itemTags.forEach(function (element) {
+        element.addEventListener("click", function () {
             gatherTagInput(itemIndex, element.id);
         });
     });
 
     // Checkbox event listener
-    itemCheckBox.addEventListener("click", function(){
+    itemCheckBox.addEventListener("click", function () {
         ToDoList[itemIndex].isChecked = !ToDoList[itemIndex].isChecked;
         toggleCrossed("item-title" + itemIndex);
         printList();
@@ -207,7 +210,7 @@ function addToDoEvents(ToDoItem){
 
 // Functions to replace text with textbox and vice versa. TitleItem will be the div container,
 //Containing the h3 tag of the title. This is what will be swapped.
-function gatherTitleInput(index){
+function gatherTitleInput(index) {
     var titleText = ToDoList[index].title;
 
     var inputElement = document.createElement('input');
@@ -226,23 +229,23 @@ function gatherTitleInput(index){
     inputElement.focus();
     inputElement.select();
 
-    inputElement.addEventListener("keypress", function(event) {
+    inputElement.addEventListener("keypress", function (event) {
         if ((inputElement.value.trim() == "") && (event.key === "Enter")) {
             // If the input field is empty, revert back to <h3>
             ToDoList[index].title = oldh3Value;
             printList();
-        }else if (event.key === "Enter") {
+        } else if (event.key === "Enter") {
             ToDoList[index].title = inputElement.value;
             printList();
         }
     });
 
-    inputElement.addEventListener("blur", function(){
+    inputElement.addEventListener("blur", function () {
         if (inputElement.value.trim() == "") {
             // If the input field is empty, revert back to <h3>
             ToDoList[index].title = oldh3Value;
             printList();
-        }else{
+        } else {
             ToDoList[index].title = inputElement.value;
             printList();
         }
@@ -250,7 +253,7 @@ function gatherTitleInput(index){
 }
 
 //Function to collect tag input
-function gatherTagInput(index, tagID){
+function gatherTagInput(index, tagID) {
     numbers = tagID.match(/\d+/g);
     tagIndex = numbers[1];
 
@@ -263,15 +266,15 @@ function gatherTagInput(index, tagID){
     inputElement.value = tagValue;
     inputElement.id = "item-tag-bar" + index;
     inputElement.className = "item-tag-bar";
-    
+
     tagContainer.replaceChild(inputElement, tag);
 
     // Focus on the input field
     inputElement.focus();
     inputElement.select();
 
-    inputElement.addEventListener("keypress", function(event) {
-        if((tagValue == "new tag...")  && (event.key === "Enter")){
+    inputElement.addEventListener("keypress", function (event) {
+        if ((tagValue == "new tag...") && (event.key === "Enter")) {
             removeTag(index, tagValue);
             addTag(index, inputElement.value);
             printList();
@@ -280,22 +283,22 @@ function gatherTagInput(index, tagID){
             // If the input field is empty, remove the tag
             removeTag(index, tagValue);
             printList();
-        }else if (event.key === "Enter") {
+        } else if (event.key === "Enter") {
             removeTag(index, tagValue);
             addTag(index, inputElement.value);
             printList();
         }
     });
 
-    inputElement.addEventListener("blur", function(){
+    inputElement.addEventListener("blur", function () {
         if (inputElement.value.trim() == "") {
             // If the input field is empty, revert back to regular tag value
             printList();
-        } else if (!(tagValue == "new tag...")){
+        } else if (!(tagValue == "new tag...")) {
             removeTag(index, tagValue);
             addTag(index, inputElement.value);
             printList();
-        } else if(tagValue == "new tag..."){
+        } else if (tagValue == "new tag...") {
             removeTag(index, tagValue);
             addTag(index, inputElement.value);
             printList();
@@ -303,54 +306,57 @@ function gatherTagInput(index, tagID){
     });
 }
 
-function sortTagArray(index){
+function sortTagArray(index) {
     var tagArray = ToDoList[index].tags;
-    tagArray = tagArray.filter(function(tag) {
-        if(tag != "new tag..."){
+    tagArray = tagArray.filter(function (tag) {
+        if (tag != "new tag...") {
             addTag(index, tag);
         }
     }).sort();
     addTag(index, "new tag...");
 }
 
-function tagsToArray(index){
+function tagsToArray(index) {
     let tagsArray = ToDoList[index].tags;
     let outputArray = [];
-    for(var i = 0; i < tagsArray.length; i++){
+    for (var i = 0; i < tagsArray.length; i++) {
         outputArray.push(document.getElementById("item" + index + "-tag" + i));
     }
     return outputArray;
 }
 
-function sortToDoList(){
+function sortToDoList() {
     //if sort alphebetical
+    if(document.getElementById('alpha-button') == null || document.getElementById('reverse-button') == null || document.getElementById('tag-button')){
+        return false;
+    }
     let isAlpha = document.getElementById('alpha-button').checked;
     let isReverse = document.getElementById('reverse-button').checked;
     let isByTag = document.getElementById('tag-button').checked;
 
-    if(isAlpha){
+    if (isAlpha) {
         ToDoList.sort((a, b) => {
             // Convert titles to lowercase for case-insensitive sorting
             var titleA = a.title.toLowerCase();
             var titleB = b.title.toLowerCase();
-        
+
             if (titleA < titleB) return -1;
             if (titleA > titleB) return 1;
             return 0;
         });
-    } else if(isReverse){
+    } else if (isReverse) {
         ToDoList.sort((a, b) => {
             // Convert titles to lowercase for case-insensitive sorting
             var titleA = a.title.toLowerCase();
             var titleB = b.title.toLowerCase();
-        
+
             if (titleA < titleB) return 1;
             if (titleA > titleB) return -1;
             return 0;
         });
     }
 
-    if(isByTag){
+    if (isByTag) {
         ToDoList.sort((a, b) => {
             // Convert titles to lowercase for case-insensitive sorting
             var tagA = JSON.stringify(a.tags);
@@ -362,36 +368,71 @@ function sortToDoList(){
     }
 }
 
-function addFilterWindowListener(){
+function addFilterWindowListener() {
     let filterButtons = document.getElementsByClassName('filter');
-    Array.from(filterButtons).forEach(function(button){
+    Array.from(filterButtons).forEach(function (button) {
         button.addEventListener("change", printList);
     });
 }
 
-function addSearchBarListener(){
+function addSearchBarListener() {
+    if(document.getElementById('search-bar') == null){
+        return false;
+    }
     let searchBar = document.getElementById('search-bar');
-    searchBar.addEventListener("keypress", function(event){
-        if(event.key === "Enter"){
+    searchBar.addEventListener("keypress", function (event) {
+        if (event.key === "Enter") {
             printList();
         }
     })
 }
 
-function addDefaultisteners(){
-    addFilterWindowListener();
-    addSearchBarListener();
+
+function addSaveListener() {
+    if(document.getElementById('save-button') == null){
+        return false;
+    }
+    let saveButton = document.getElementById('save-button');
+    saveButton.addEventListener("click", function () {
+        // Create a form element
+        var form = document.createElement("form");
+        form.method = "POST";
+        form.action = ""; // This will post the form data to the current URL
+
+        // Create a hidden input field to hold the ToDoList data
+        var input = document.createElement("input");
+        input.type = "hidden";
+        input.name = "ToDoList";
+        input.value = JSON.stringify(ToDoList);
+        // Append the input field to the form
+        form.appendChild(input);
+
+        // Append the form to the document body
+        document.body.appendChild(form);
+
+        // Submit the form
+        form.submit();
+    });
 }
 
-function searchToDoList(){
+function addDefaultisteners() {
+    addFilterWindowListener();
+    addSearchBarListener();
+    addSaveListener();
+}
+
+function searchToDoList() {
+    if(document.getElementById('search-bar') == null){
+        return false;
+    }
     var output = [];
     var searchElement = document.getElementById('search-bar');
     var searchVal = searchElement.value;
     const regex = new RegExp(".*" + searchVal + ".*");
-    for(item of ToDoList){
-        if(regex.test(item.title)){
+    for (item of ToDoList) {
+        if (regex.test(item.title)) {
             output.push(item);
-        } else if(regex.test(JSON.stringify(item.tags))){
+        } else if (regex.test(JSON.stringify(item.tags))) {
             output.push(item);
         }
     }
@@ -402,3 +443,5 @@ function searchToDoList(){
 addTestToDo(); //populates the array with some test info. 
 
 addDefaultisteners();//adds the listeners which arent removed every printlist.
+
+printList();

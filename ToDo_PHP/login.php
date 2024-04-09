@@ -1,5 +1,8 @@
 <?php 
     include_once 'db_connection.php';
+    require_once 'handyFunctions.php';
+
+    session_start();
 
     // Check request method
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -45,11 +48,12 @@
 
         if($passResult->num_rows != 1){
             //ToDo JavaScript Function: Incorrect Password
-            redirect("http://localhost");
+           redirect("http://localhost");
         }
 
         closeCon($connection);
-        redirect("http://localhost/ToDo_HTML/ToDO.html");
+        $_SESSION['username'] = $username;
+        redirect("http://localhost/ToDo_PHP/ToDo.php");
     }
 
     function userCheck($connection, $username){
@@ -68,8 +72,4 @@
         return $result;
     }
 
-    function redirect($url) {
-        header('Location: '.$url);
-        die();
-    }
 ?>
