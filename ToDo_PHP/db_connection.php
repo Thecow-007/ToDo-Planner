@@ -1,3 +1,4 @@
+<!-- COLE & DANIEL -->
 <?php
     function openConnection(){
         $servername = "localhost";

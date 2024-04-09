@@ -1,3 +1,4 @@
+<!-- COLE -->
 <!DOCTYPE html>
 <html lang="en">
 <!-- Please Note: The paper effect seen here was sourced from https://www.codesdope.com/blog/article/getting-notebook-paper-effect-with-css/,
@@ -10,6 +11,7 @@ Then altered for use on this page. -->
     <link rel="stylesheet" href="../ToDo_CSS/login.css">
     <link rel="shortcut icon" href="#">
 </head>
+<!-- DANIEL -->
 <?php
     require_once 'db_connection.php';
     require_once 'AccountCheck.php';
@@ -18,28 +20,26 @@ Then altered for use on this page. -->
 <body>
     <div id="paper">
         <div id="pattern">
+<!-- COLE -->
             <div class="formcontainer">
                 <h1 id="title">Create Account</h1>
                 <form action="./CreateAccount.php" method="POST" onsubmit="return AccountCreate();">
                     <div class="textfieldUsername">
                         <label for="username">Username</label>
                         <input type="text" name="username" id="username" placeholder="Username" class="typingbox">
-                        <div id="UserErrorText" style="display: none;"><h2>*User Already Exists.</h2></div>
-                        <div id="UserBlankText" style="display: none;"><h2>*Must Include Username.</h2></div>
-                        <div id="UserLengthText" style="display: none;"><h2>*Must Be Less Than 20 Characters.</h2></div>
+                        <div id="UserErrorText" style="display: inline;"><h2></h2></div>
                     </div>
 
                     <div class="textfieldPassword">
                         <label for="pass">Password</label>
                         <input type="password" name="pass" id="pass" placeholder="Password" class="typingbox">
-                        <div id="PassErrorText" style="display: none;"><h2>*Password Must Contain At Least: 6 Letters, 1 Lowercase Letter, 1 Capital Letter.</h2></div>
+                        <div id="PassErrorText" style="display: inline;"><h2></h2></div>
                     </div>
 
                     <div class="textfieldPassword2">
                         <label for="pass2">Re-type Password</label>
                         <input type="password" name="pass2" id="pass2" placeholder="Password" class="typingbox">
-                        <div id="Pass2ErrorText" style="display: none;"><h2>*Passwords Do Not Match.</h2></div>
-                        <div id="Pass2BlankText" style="display: none;"><h2>*Must Repeat Password.</h2></div>
+                        <div id="Pass2ErrorText" style="display: inline;"><h2></h2></div>
                     </div>
 
                     <div class="buttons"><button type="submit" id="CreateAccount-button">Create Account</button>

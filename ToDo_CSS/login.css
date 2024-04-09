@@ -1,3 +1,4 @@
+/* DANIEL */
 :root{
     --margin-padding: 9%;
   }
@@ -37,6 +38,8 @@
     background-image: repeating-linear-gradient(rgb(248, 248, 243) 0px, rgb(248, 248, 243) 49px, teal 50px);
   }
 
+  
+/* COLE */
   h1, .textfieldUsername, .textfieldPassword, .textfieldPassword2, .buttons {
     display: flex;
     justify-content: center;
@@ -111,16 +114,17 @@ h2 {
 
 #UserErrorText, #PassErrorText, #Pass2ErrorText {
     position: absolute;
+    font-size: 13px;
 }
 
-#UserErrorText, #UserBlankText {
-    top: 161px;
+#UserErrorText {
+    top: 171px;
 }
 
 #PassErrorText {
-    top: 260px;
+    top: 271px;
 }
 
 #Pass2ErrorText {
-    top: 359px;
+    top: 371px;
 }
