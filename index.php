@@ -5,13 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ToDo: Login</title>
-    <script src="./login.js"></script>
+    <script src="./ToDo_JS/login.js"></script>
     <link rel="stylesheet" href="./ToDo_CSS/login.css">
 </head>
 
 <?php
-    require './ToDo_PHP/db_connection.php';
-    openConnection();
+    require_once './ToDo_PHP/db_connection.php';
+    require_once './ToDo_PHP/login.php';
+    $connection = openConnection();
 ?>
 
 <body>
@@ -21,8 +22,7 @@
             <h1 id="title">Login</h1>
 
             <div class="formcontainer">
-                <form action="./ToDo_HTML/ToDo.html" method="post" onsubmit="return AccountLogin();">
-
+                <form action="./index.php" method="post" onsubmit="return AccountLogin();">
                     <div class="textfieldUsername">
                         <label for="username" id="TextUsername">Username</label>
                         <input type="text" name="username" id="username" placeholder="Username" class="typingbox">

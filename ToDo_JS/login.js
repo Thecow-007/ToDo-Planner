@@ -1,6 +1,5 @@
 
 function AccountLogin() {
-    console.log("HHHHHH");
     var username = document.getElementById('username').value.trim();
     var pass = document.getElementById('pass').value;
 
@@ -30,23 +29,19 @@ function AccountLogin() {
 }
 
 function AccountCreate() {
-    console.log("HHHHHH");
     var username = document.getElementById('username').value.trim();
     var pass = document.getElementById('pass').value;
     var pass2 = document.getElementById('pass2').value;
 
-    var usernameElement = document.getElementById('username');
-    var passElement = document.getElementById('pass');
-    var pass2Element = document.getElementById('pass2');
-
     var usernameIsValid = username !== '' && username.length <= 20;
     var passIsValid = pass.length >= 6 && /[a-z]/.test(pass) && /[A-Z]/.test(pass);
     var pass2IsValid = pass2.length >= 6 && /[a-z]/.test(pass2) && /[A-Z]/.test(pass2) && pass === pass2;
-    var complete = false;
 
     if (usernameIsValid && passIsValid && pass2IsValid) {
        window.location.assign("./ToDo_HTML/ToDo.html");
     }
+
+    thePHP();
 
     return usernameIsValid && passIsValid && pass2IsValid;
 }
@@ -115,4 +110,9 @@ function passDoNotMatch() {
     pass2Element.style.borderColor = 'red';
     document.getElementById('Pass2ErrorText').style.display = 'inline';
     document.getElementById('Pass2ErrorText').style.color = 'red';
+}
+
+function logTest() {
+    console.log("HHHHHH");
+    return false;
 }

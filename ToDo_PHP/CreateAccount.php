@@ -5,20 +5,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ToDo: Create Account</title>
-    <script src="../ToDo_JS/login.js"></script>
+    <script src="../ToDo_JS\login.js"></script>
     <link rel="stylesheet" href="../ToDo_CSS/login.css">
     <link rel="shortcut icon" href="#">
 </head>
 <?php
-    require 'AccountCheck.php';
+    require_once 'db_connection.php';
+    require_once 'AccountCheck.php';
+    $connection = openConnection();
 ?>
 <body>
     <div id="paper">
         <div id="pattern">
             <div class="formcontainer">
                 <h1 id="title">Create Account</h1>
-                <form action="../ToDo_HTML/ToDo.html" method="POST" onsubmit="return AccountCreate();">
-
+                <form action="./CreateAccount.php" method="POST" onsubmit="return AccountCreate();">
                     <div class="textfieldUsername">
                         <label for="username">Username</label>
                         <input type="text" name="username" id="username" placeholder="Username" class="typingbox">
