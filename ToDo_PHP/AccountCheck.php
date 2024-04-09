@@ -69,9 +69,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     insertToUser($conn, $username, $hashedPassword);
 
-    redirect("http://localhost/ToDo_HTML/ToDO.html");
-    
     closeCon($conn);
+    redirect("http://localhost/ToDo_HTML/ToDO.html");
 }
 
 function userCheck($connection, $username){

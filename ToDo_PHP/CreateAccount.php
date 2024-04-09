@@ -19,7 +19,6 @@
             <div class="formcontainer">
                 <h1 id="title">Create Account</h1>
                 <form action="./CreateAccount.php" method="POST" onsubmit="return AccountCreate();">
-
                     <div class="textfieldUsername">
                         <label for="username">Username</label>
                         <input type="text" name="username" id="username" placeholder="Username" class="typingbox">
