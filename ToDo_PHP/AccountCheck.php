@@ -1,19 +1,21 @@
 
 
 <?php 
-
 require_once 'db_connection.php';
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST["username"];
     $password = $_POST["pass"];
     $password2 = $_POST["pass2"];
 
-    
-function thePHP() {
-    logTest();
 
-$conn = openConnection();
+    $conn = openConnection();
+
+    if (empty($username)) {
+        echo '<script>';
+        echo 'userAlreadyExists();';
+        echo '</script>';
+        exit;
+    }
 
     if (strlen($username) <= 20 && !empty($username)) {
         $validUsername = true;
@@ -76,11 +78,7 @@ $conn = openConnection();
         }
     
 
-    $checkExistingUsernames = "SELECT * FROM user WHERE userName = :userName";
-    $userCheck = $connection->prepare($checkExistingUsernames);
-    $userCheck->bind_param(":userName", $username);
-    $userCheck->execute();
-    $result = $userCheck->get_result();
+    $result = userCheck($conn, $username);
 
     if ($result->num_rows > 0) {
         $userIsNew = false;
@@ -93,13 +91,39 @@ $conn = openConnection();
     }
 
     $hashedPassword = hash('sha256', $password);
+    $toHash = "DanielPassword";
 
-    $insertToUser = "INSERT INTO user (userName, userPassword) VALUES (:userName, :passWord)";
-    $userCheck = $connection->prepare($insertToUser);
-    $userCheck->bind_param(":userName", $username);
-    $userCheck->bind_param(":passWord", $hashedPassword);
+    echo "<script>";
+    echo "var hashResult = " . hash('sha256', $toHash);
+    echo "console.log(hashResult);";
+    echo "</script>";
 
-    closeCon();
+    insertToUser($conn, $username, $hashedPassword);
+
+    closeCon($conn);
+    redirect("http://localhost/ToDo_HTML/ToDO.html");
+}
+
+function userCheck($connection, $username){
+    $checkExistingUsernames = "SELECT * FROM user WHERE userName = '" . $username . "';";
+    $userCheck = $connection->prepare($checkExistingUsernames);
+    $userCheck->execute();
+    $result = $userCheck->get_result();
+    return $result;
+}
+
+function insertToUser($connection, $username, $hashedPassword){
+    $insertToUser = "INSERT INTO user (userName, userPassword) VALUES ('" . $username . "', '" . $hashedPassword . "');";
+    $userCheck = $connection->query($insertToUser);
+    echo "Inserting User...";   
+    // $userCheck->execute();
+}
+
+function redirect($url) {
+    header('Location: '.$url);
+    die();
+}
+
 
     return $validUsername && $validPassword && $valid2ndPass && $userIsNew;
 }
